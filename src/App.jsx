@@ -14,7 +14,7 @@ function Home() {
       <Hero />
       <About />
       <Services />
-      <Courses /> {/* ✅ added */}
+      <Courses /> 
     </>
   )
 }
