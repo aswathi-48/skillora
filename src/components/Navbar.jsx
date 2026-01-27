@@ -8,7 +8,22 @@ export default function Navbar() {
     localStorage.removeItem("loggedUser");
     navigate("/login");
   };
-
+ const handleContactClick = () => {
+    // If not on home → go home first
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("contact")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      // Already on home → just scroll
+      document
+        .getElementById("contact")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
       <div
@@ -35,14 +50,22 @@ export default function Navbar() {
           <NavLink to="/services" className="text-gray-700 font-medium">
             Services
           </NavLink>
-
-          <NavLink to="/contact" className="text-gray-700 font-medium">
+{/* 
+          <NavLink to="/#contact" className="text-gray-700 font-medium">
             Contact
-          </NavLink>
-
+          </NavLink> */}
+  <button
+            onClick={handleContactClick}
+            className="text-gray-700 font-medium"
+          >
+            Contact
+          </button>
           {!user && (
             <>
-              <NavLink to="/login" className="bg-primary px-4 py-1 rounded-full font-semibold">
+              <NavLink
+                to="/login"
+                className="bg-primary px-4 py-1 rounded-full font-semibold"
+              >
                 Login
               </NavLink>
 
