@@ -1,88 +1,138 @@
+import { motion } from "framer-motion";
+
 export default function Services() {
   return (
     <section id="services" className="py-28 bg-secondary px-6">
       <div className="max-w-6xl mx-auto text-center">
-        
-        {/* Heading */}
-        <h2 className="text-3xl font-bold text-dark mb-4">
-          Our Services
-        </h2>
 
-        <p className="text-gray-600 max-w-2xl mx-auto mb-14">
+        {/* Heading */}
+        <motion.h2
+          className="text-3xl font-bold text-dark mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Our Services
+        </motion.h2>
+
+        <motion.p
+          className="text-gray-600 max-w-2xl mx-auto mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
           We offer end-to-end career-focused services designed to help learners
           gain industry-ready skills, confidence, and placement support.
-        </p>
+        </motion.p>
 
         {/* Services Cards */}
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Service 1 */}
-          <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-dark mb-3">
-              Skill Training
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Hands-on, industry-aligned training programs built around real-world
-              projects and practical assignments.
-            </p>
-            <ul className="text-sm text-gray-600 space-y-2 text-left">
-              <li>• Latest IT & Non-IT technologies</li>
-              <li>• Project-based learning</li>
-              <li>• Beginner to advanced tracks</li>
-            </ul>
-          </div>
-
-          {/* Service 2 */}
-          <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-dark mb-3">
-              Career Guidance
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Personalized mentoring and career road-mapping to help learners
-              make informed decisions and stay industry-relevant.
-            </p>
-            <ul className="text-sm text-gray-600 space-y-2 text-left">
-              <li>• One-to-one mentoring</li>
-              <li>• Career path planning</li>
-              <li>• Resume & profile review</li>
-            </ul>
-          </div>
-
-          {/* Service 3 */}
-          <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-dark mb-3">
-              Placement Support
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Dedicated placement assistance focused on improving interview
-              performance and job readiness.
-            </p>
-            <ul className="text-sm text-gray-600 space-y-2 text-left">
-              <li>• Mock interviews & assessments</li>
-              <li>• Interview preparation sessions</li>
-              <li>• Employer & recruiter connects</li>
-            </ul>
-          </div>
+          {[
+            {
+              title: "Skill Training",
+              desc:
+                "Hands-on, industry-aligned training programs built around real-world projects and practical assignments.",
+              points: [
+                "Latest IT & Non-IT technologies",
+                "Project-based learning",
+                "Beginner to advanced tracks",
+              ],
+            },
+            {
+              title: "Career Guidance",
+              desc:
+                "Personalized mentoring and career road-mapping to help learners make informed decisions and stay industry-relevant.",
+              points: [
+                "One-to-one mentoring",
+                "Career path planning",
+                "Resume & profile review",
+              ],
+            },
+            {
+              title: "Placement Support",
+              desc:
+                "Dedicated placement assistance focused on improving interview performance and job readiness.",
+              points: [
+                "Mock interviews & assessments",
+                "Interview preparation sessions",
+                "Employer & recruiter connects",
+              ],
+            },
+          ].map((service, i) => (
+            <motion.div
+              key={i}
+              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-left"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              whileHover={{ y: -6 }}
+            >
+              <h3 className="font-semibold text-dark mb-3">
+                {service.title}
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                {service.desc}
+              </p>
+              <ul className="text-sm text-gray-600 space-y-2">
+                {service.points.map((point, idx) => (
+                  <li key={idx}>• {point}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-20 grid sm:grid-cols-3 gap-8 text-center">
-          <div>
-            <h4 className="text-2xl font-bold text-dark">10K+</h4>
-            <p className="text-sm text-gray-600">Learners Trained</p>
-          </div>
-          <div>
-            <h4 className="text-2xl font-bold text-dark">95%</h4>
-            <p className="text-sm text-gray-600">Placement Assistance Rate</p>
-          </div>
-          <div>
-            <h4 className="text-2xl font-bold text-dark">100+</h4>
-            <p className="text-sm text-gray-600">Industry Mentors</p>
-          </div>
-        </div>
+        <motion.div
+          className="mt-20 grid sm:grid-cols-3 gap-8 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+        >
+          {[
+            { value: "10K+", label: "Learners Trained" },
+            { value: "95%", label: "Placement Assistance Rate" },
+            { value: "100+", label: "Industry Mentors" },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 30, scale: 0.95 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.6, ease: "easeOut" },
+                },
+              }}
+              className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition"
+            >
+              <h4 className="text-3xl font-bold text-dark mb-1">
+                {item.value}
+              </h4>
+              <p className="text-sm text-gray-600">
+                {item.label}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );
 }
+
 
 // import { useState } from "react";
 
