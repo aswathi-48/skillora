@@ -1,12 +1,14 @@
-import { Routes, Route } from "react-router-dom"
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import About from "./components/About"
-import Services from "./components/Services"
-import Courses from "./components/Courses"
-import Footer from "./components/Footer"
-import ScrollToTop from "./components/ScrollToTop"
-import CoursesPage from "./pages/CoursesPage"
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Services from "./components/Services";
+import Courses from "./components/Courses";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import CoursesPage from "./pages/CoursesPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function Home() {
   return (
@@ -14,25 +16,33 @@ function Home() {
       <Hero />
       <About />
       <Services />
-      <Courses /> 
+      <Courses />
     </>
-  )
+  );
 }
 
 export default function App() {
+  const location = useLocation();
+
+  const hideLayout =
+    location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <>
       <ScrollToTop />
-      <Navbar />
+
+      {!hideLayout && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/courses" element={<CoursesPage />} /> {/* ✅ */}
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
-      <Footer />
+      {!hideLayout && <Footer />}
     </>
-  )
+  );
 }
