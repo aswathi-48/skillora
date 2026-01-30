@@ -6,8 +6,7 @@ It provides industry-ready courses, career guidance, and placement support with 
 ---
 
 ## 🚀 Live Preview
-> _(Add your deployed URL here)_  
-Example: https://skillora.vercel.app
+Example: https://skillora-theta.vercel.app/
 
 ---
 
