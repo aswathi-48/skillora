@@ -1,17 +1,40 @@
+import { motion } from "framer-motion";
+import { fadeUp } from "../utils/animations";
+
 export default function Hero() {
   return (
-    <section className="relative text-center pt-40 pb-28 bg-gradient-to-r from-primary to-yellow-200 text-dark">
-      <h1 className="text-5xl font-bold mb-4">
+    <section className="relative overflow-hidden text-center pt-44 pb-32 bg-gradient-to-r from-primary via-yellow-200 to-primary text-dark">
+
+      {/* background blur */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-white/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
+
+      <motion.h1
+        className="text-5xl md:text-6xl font-bold mb-6 relative z-10"
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+      >
         Build Your Future
-      </h1>
+      </motion.h1>
 
-      <p className="mb-6 text-lg opacity-90">
+      <motion.p
+        className="mb-8 text-lg opacity-90 relative z-10"
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.1 }}
+      >
         Learn skills that matter in the real world
-      </p>
+      </motion.p>
 
-      <button className="bg-white text-dark px-12 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition">
+      <motion.button
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="bg-white text-dark px-12 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition relative z-10"
+      >
         Get Started
-      </button>
+      </motion.button>
     </section>
-  )
+  );
 }
