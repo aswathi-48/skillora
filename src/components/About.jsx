@@ -1,172 +1,76 @@
-// import { useEffect, useRef, useState } from "react"
-// import aboutImg from "../../public/images/image.png"
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Award, Users, BookOpen, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-// function Counter({ end, label, start }) {
-//   const [count, setCount] = useState(0)
-
-//   useEffect(() => {
-//     if (!start) return
-
-//     let current = 0
-//     const duration = 1500
-//     const increment = Math.ceil(end / (duration / 16))
-
-//     const timer = setInterval(() => {
-//       current += increment
-//       if (current >= end) {
-//         current = end
-//         clearInterval(timer)
-//       }
-//       setCount(current)
-//     }, 16)
-
-//     return () => clearInterval(timer)
-//   }, [start, end])
-
-//   return (
-//     <div className="flex flex-col items-center justify-center px-6 ">
-//       <h3 className="text-4xl font-bold text-dark">
-//         {count}+
-//       </h3>
-//       <p className="text-sm text-gray-700 mt-1 font-medium">
-//         {label}
-//       </p>
-//     </div>
-//   )
-// }
-
-// export default function About() {
-//   const sectionRef = useRef(null)
-//   const [startCount, setStartCount] = useState(false)
-
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       ([entry]) => {
-//         if (entry.isIntersecting) {
-//           setStartCount(true)
-//           observer.disconnect()
-//         }
-//       },
-//       { threshold: 0.4 }
-//     )
-
-//     if (sectionRef.current) observer.observe(sectionRef.current)
-//     return () => observer.disconnect()
-//   }, [])
-
-//   return (
-//     <section ref={sectionRef} id="about" className="py-20 bg-white px-4">
-//       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-
-//         <img
-//           src={aboutImg}
-//           alt="Student"
-//           className="rounded-md shadow-md w-full max-h-[420px] object-cover"
-//         />
-
-//         <div>
-//           <p className="text-xs text-primary font-semibold uppercase mb-1">
-//             About Us
-//           </p>
-
-//           <h2 className="text-2xl font-bold text-dark mb-4">
-//             First Choice For Online Education Anywhere
-//           </h2>
-
-//           <p className="text-sm text-gray-600 mb-6">
-//             Skillora empowers learners with industry-ready skills and real-world knowledge.
-//           </p>
-
-//           <div className="border border-primary rounded-full py-6 px-4 flex justify-between text-center bg-secondary">
-//             <Counter end={10} label="Courses" start={startCount} />
-//             <Counter end={2000} label="Students" start={startCount} />
-//             <Counter end={1000} label="Placements" start={startCount} />
-//           </div>
-//         </div>
-
-//       </div>
-//     </section>
-//   )
-// }
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import aboutImg from "../../public/images/image.png";
-import { fadeUp } from "../utils/animations";
-
-function Counter({ end, label, start }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!start) return;
-    let current = 0;
-    const step = Math.ceil(end / 60);
-
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= end) {
-        current = end;
-        clearInterval(timer);
-      }
-      setCount(current);
-    }, 20);
-
-    return () => clearInterval(timer);
-  }, [start, end]);
-
+const About = () => {
   return (
-    <motion.div
-      variants={fadeUp}
-      className="flex flex-col items-center px-6"
-    >
-      <h3 className="text-4xl font-bold">{count}+</h3>
-      <p className="text-sm text-gray-700">{label}</p>
-    </motion.div>
-  );
-}
+    <section id="about" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Image Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                alt="Students in library"
+                className="rounded-2xl shadow-lg w-full h-64 object-cover transform translate-y-8"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                alt="Modern classroom"
+                className="rounded-2xl shadow-lg w-full h-64 object-cover"
+              />
+            </div>
+            {/* Experience Badge */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-full shadow-xl border border-neutral-100 text-center w-40 h-40 flex flex-col justify-center items-center z-10">
+              <span className="text-4xl font-bold text-secondary">5+</span>
+              <span className="text-sm font-medium text-neutral-600">Years of<br />Excellence</span>
+            </div>
+          </motion.div>
 
-export default function About() {
-  const ref = useRef(null);
-  const [start, setStart] = useState(false);
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-secondary font-semibold uppercase tracking-wide mb-2">About Skillora</h2>
+            <h3 className="text-4xl font-serif font-bold text-primary mb-6">Building a Legacy of Knowledge & Innovation</h3>
+            <p className="text-neutral-600 text-lg mb-6 leading-relaxed">
+              At Skillora, we believe education is the catalyst for change. For over 5 years, we have been at the forefront of academic excellence, nurturing young minds to become global leaders. Our holistic approach combines rigorous academics with practical skill development.
+            </p>
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => e.isIntersecting && setStart(true),
-      { threshold: 0.4 }
-    );
-    ref.current && obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+            <div className="space-y-4 mb-8">
+              {[
+                "World-class infrastructure and laboratories",
+                "Expert faculty with industry experience",
+                "Focus on holistic development and soft skills",
+                "Global university collaborations"
+              ].map((item, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <CheckCircle className="text-secondary h-5 w-5 flex-shrink-0" />
+                  <span className="text-neutral-700 font-medium">{item}</span>
+                </div>
+              ))}
+            </div>
 
-  return (
-    <section ref={ref} className="py-20 bg-white px-6">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-        <motion.img
-          src={aboutImg}
-          alt="About"
-          className="rounded-xl shadow-md"
-          whileHover={{ scale: 1.03 }}
-        />
-
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
-          <p className="text-xs text-primary uppercase font-semibold mb-2">
-            About Us
-          </p>
-          <h2 className="text-2xl font-bold mb-4">
-            First Choice For Online Education Anywhere
-          </h2>
-          <p className="text-sm text-gray-600 mb-6">
-            Skillora empowers learners with industry-ready skills and real-world knowledge.
-          </p>
-
-          <div className="border rounded-full py-6 flex justify-between bg-secondary">
-            <Counter end={10} label="Courses" start={start} />
-            <Counter end={2000} label="Students" start={start} />
-            <Counter end={1000} label="Placements" start={start} />
-          </div>
-        </motion.div>
-
+            <Link to="/story" className="text-primary font-semibold hover:text-secondary transition-colors duration-300 flex items-center group">
+              Read Our Story
+              <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default About;

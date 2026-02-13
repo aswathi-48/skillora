@@ -2,23 +2,26 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Services from "./components/Services";
+import OurStory from "./pages/OurStory";
+import Features from "./components/Features";
 import Courses from "./components/Courses";
+import CourseDetails from "./pages/CourseDetails";
+import AppDownload from "./components/AppDownload";
+import Events from "./components/Events";
+import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import CoursesPage from "./pages/CoursesPage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Contact from "./components/Contact";
 
 function Home() {
   return (
     <>
       <Hero />
       <About />
-      <Services />
+      <Features />
       <Courses />
-       <Contact />
+      <AppDownload />
+      <Events />
+      <Testimonials />
     </>
   );
 }
@@ -26,25 +29,29 @@ function Home() {
 export default function App() {
   const location = useLocation();
 
-  const hideLayout =
-    location.pathname === "/login" || location.pathname === "/register";
+  // Hide Navbar/Footer on login/register if those routes exist/are needed
+  const hideLayout = location.pathname === "/login" || location.pathname === "/register";
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <ScrollToTop />
 
       {!hideLayout && <Navbar />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/courses" element={<CoursesPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/story" element={<OurStory />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/contact" element={<Footer />} />
+          {/* Add other routes as needed */}
+        </Routes>
+      </main>
 
       {!hideLayout && <Footer />}
-    </>
+    </div>
   );
 }
